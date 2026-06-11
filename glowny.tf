@@ -13,7 +13,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "dev" {
   name     = "rgtest001"
-  location = "CentralPoland"
+  location = "PolandCentral"
 }
 
 resource "azurerm_storage_account" "cache" {
