@@ -12,7 +12,7 @@ This Terraform configuration creates:
 - Virtual Network
 - Two subnets
 - Network Security Group
-- NSG association with one subnet
+- NSG association with the secure subnet
 
 ## Resources
 
