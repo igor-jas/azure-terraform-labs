@@ -9,6 +9,7 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 | Lab | Description |
 |---|---|
 | [lab-01-networking](./lab-01-networking) | Basic Azure networking with Terraform: Resource Group, Virtual Network, subnets, Network Security Group and NSG association |
+| [lab-02-linux-vm](./lab-02-linux-vm) | Linux virtual machine with Terraform: VNet, subnet, NSG rule for SSH, Public IP, Network Interface and Ubuntu VM |
 
 ## Current focus
 
