@@ -47,6 +47,8 @@ The Network Security Group allows inbound SSH traffic on port `22`.
 | Admin user | `azureuser` |
 | Authentication | SSH key |
 
+> Note: During testing, smaller B-series VM sizes such as `Standard_B1s`, `Standard_B1ms` and `Standard_B2s` were unavailable due to Azure capacity restrictions in the tested regions. `Standard_D2s_v5` was used temporarily to complete the lab, and all resources were destroyed after validation to avoid unnecessary costs.
+
 ## Terraform commands used
 
 ```bash

@@ -11,6 +11,12 @@ provider "azurerm" {
   features {}
 }
 
+variable "ssh_public_key_path" {
+  description = "Path to the SSH public key used for VM authentication"
+  type        = string
+  default     = "~/.ssh/azure-linux-vm-lab.pub"
+}
+
 resource "azurerm_resource_group" "lab" {
   name     = "rg-linux-vm-lab"
   location = "westeurope"
@@ -87,7 +93,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file("C:/Users/igorj/.ssh/azure-linux-vm-lab.pub")
+    public_key = file(var.ssh_public_key_path)
   }
 
   os_disk {
