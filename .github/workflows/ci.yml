@@ -1,0 +1,82 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
+      
+      - name: Terraform fmt check (lab-01)
+        run: terraform fmt -check
+        working-directory: lab-01-networking
+
+      - name: Terraform validate (lab-01)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-01-networking
+        
+      
+      - name: Terraform fmt check (lab-02) 
+        run: terraform fmt -check 
+        working-directory: lab-02-linux-vm
+
+      - name: Terraform validate (lab-02)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-02-linux-vm
+
+      
+      - name: Terraform fmt check (lab-03)
+        run: terraform fmt -check
+        working-directory: lab-03-nginx-web-server
+
+      - name: Terraform validate (lab-03) 
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-03-nginx-web-server
+
+      
+      - name: Terraform fmt check (lab-04) 
+        run: terraform fmt -check
+        working-directory: lab-04-container-instance
+
+      - name: Terraform validate (lab-04) 
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-04-container-instance
+
+
+      - name: Build Docker image (lab-05)
+        run: docker build -t igor-flask-app .
+        working-directory: lab-05-docker-flask
+      
+      - name: Run container for testing
+        run: docker run -d -p 5000:5000 --name igor-flask-container igor-flask-app
+        working-directory: lab-05-docker-flask
+
+      - name: Wait for container to start
+        run: sleep 3
+
+      
+      - name: Run Bash status check script (lab-06)
+        run: |
+          chmod +x check-container-status.sh
+          ./check-container-status.sh igor-flask-container 5000
+        working-directory: lab-06-bash-scripting  
+
+
+        
