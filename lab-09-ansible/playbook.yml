@@ -1,0 +1,25 @@
+---
+- name: Configure local Nginx web server
+  hosts: local
+  vars:
+    site_message: "Hello from Ansible! Configured by Igor Jas."
+
+  tasks:
+    - name: Install Nginx
+      homebrew:
+        name: nginx
+        state: present
+
+    - name: Deploy custom index.html
+      template:
+        src: templates/index.html.j2
+        dest: /opt/homebrew/var/www/index.html
+      notify: Restart Nginx
+
+    - name: Ensure Nginx is running
+      command: brew services start nginx
+      changed_when: false
+
+  handlers:
+    - name: Restart Nginx
+      command: brew services restart nginx
