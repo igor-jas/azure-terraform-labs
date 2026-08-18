@@ -15,6 +15,9 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 | [lab-05-docker-flask](./lab-05-docker-flask) | Custom Dockerfile and Flask app, built and tested locally with Docker |
 | [lab-06-bash-scripting](./lab-06-bash-scripting) | Bash script to check Docker container status and port availability |
 | [lab-07-cicd-pipeline](./lab-07-cicd-pipeline) | GitHub Actions CI pipeline validating Terraform configs, Docker build and Bash checks on every PR |
+| [lab-08-kubernetes](./lab-08-kubernetes) | Kubernetes Deployment and Service on a local kind cluster, with self-healing demonstrated |
+| [lab-09-ansible](./lab-09-ansible) | Ansible playbook for local Nginx configuration, verified for idempotency |
+| [lab-10-monitoring](./lab-10-monitoring) | Prometheus and Grafana monitoring stack for the Kubernetes cluster, installed via Helm |
 
 ## Current focus
 
@@ -24,7 +27,10 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 - Git and GitHub workflow
 - Infrastructure as Code
 - CI/CD with GitHub Actions
+- Container orchestration with Kubernetes
+- Configuration management with Ansible
+- Monitoring and observability with Prometheus and Grafana
 
 ## Status
 
-This repository is part of my learning path toward Junior Cloud Engineer roles, with a focus on Azure, Terraform, networking, and infrastructure automation.
+This repository is part of my learning path toward Junior Cloud/DevOps Engineer roles, with a focus on Azure, Terraform, Docker, Kubernetes, Ansible, and infrastructure automation.
