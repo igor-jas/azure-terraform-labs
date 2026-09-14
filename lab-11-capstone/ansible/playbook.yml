@@ -1,0 +1,47 @@
+---
+- name: Configure capstone server with Docker
+  hosts: capstone
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install prerequisites
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker daemon manually
+      shell: nohup dockerd --storage-driver=vfs > /var/log/dockerd.log 2>&1 &
+      async: 1
+      poll: 0
+
+    - name: Copy Flask app to server
+      copy:
+        src: ../../lab-05-docker-flask/
+        dest: /app
+        mode: preserve
+
+    - name: Build Flask Docker image inside server
+      shell: |
+        export DOCKER_HOST=unix:///var/run/docker.sock
+        docker build -t flask-app /app
+      args:
+        executable: /bin/bash
+
+    - name: Run Flask container inside server
+      shell: |
+        export DOCKER_HOST=unix:///var/run/docker.sock
+        docker run -d --name flask-app -p 5000:5000 flask-app
+      args:
+        executable: /bin/bash
