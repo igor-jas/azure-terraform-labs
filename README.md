@@ -18,6 +18,7 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 | [lab-08-kubernetes](./lab-08-kubernetes) | Kubernetes Deployment and Service on a local kind cluster, with self-healing demonstrated |
 | [lab-09-ansible](./lab-09-ansible) | Ansible playbook for local Nginx configuration, verified for idempotency |
 | [lab-10-monitoring](./lab-10-monitoring) | Prometheus and Grafana monitoring stack for the Kubernetes cluster, installed via Helm |
+| [lab-11-capstone](./lab-11-capstone) | End-to-end pipeline combining Terraform, Ansible, and Docker to provision, configure, and deploy a containerized Flask app, including a nested Docker-in-Docker setup |
 
 ## Current focus
 
@@ -30,6 +31,7 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 - Container orchestration with Kubernetes
 - Configuration management with Ansible
 - Monitoring and observability with Prometheus and Grafana
+- End-to-end automation pipelines integrating Terraform, Ansible, and Docker
 
 ## Status
 
