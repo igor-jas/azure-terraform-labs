@@ -35,6 +35,10 @@ This lab runs entirely locally instead of provisioning a real Azure VM, to avoid
 
 Running a Docker daemon inside a Docker container surfaced several problems that don't come up on a real VM. A bare Ubuntu image exits immediately after being created, since it has no foreground process to keep it alive, so the server image runs `sshd -D` instead. There's no systemd inside the container, so the Docker daemon can't be managed with `service docker start`; it's started manually with `nohup dockerd &` instead. The nested daemon initially failed with an `iptables: Permission denied` error, since it needs low-level network privileges the container doesn't have by default, which was fixed by running the outer container in privileged mode. It then failed again trying to build the Flask image, this time because its default OverlayFS storage driver conflicts with the host's own OverlayFS; switching the nested daemon to `--storage-driver=vfs` resolved it. Finally, port 5000 was already bound locally by macOS's ControlCenter, so the app is mapped to port 5001 externally instead.
 
+## Security note: secrets management
+
+The server's SSH password was initially hardcoded in plaintext in the Dockerfile and Ansible inventory - a deliberate simplification to get the pipeline working end-to-end first. It has since been moved out of version control: Ansible reads it from an `ansible-vault`-encrypted file (`secrets.yml`, AES-256), and Terraform reads the same value from a `TF_VAR_server_password` environment variable, since Terraform has no access to Ansible Vault. Both paths pass the value into the Docker build as a build argument (`ARG` in the Dockerfile) rather than writing it into the image directly.
+
 ## Verification
 
 After the playbook completed with `failed=0`, the Flask container was confirmed running inside the server with `docker ps`, and the app responded correctly at `http://localhost:5001`, returning the expected message from `lab-05-docker-flask`.

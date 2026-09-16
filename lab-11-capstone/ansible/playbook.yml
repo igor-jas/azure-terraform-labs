@@ -2,6 +2,8 @@
 - name: Configure capstone server with Docker
   hosts: capstone
   become: true
+  vars_files:
+    - secrets.yml
 
   tasks:
     - name: Update apt cache
@@ -35,7 +37,7 @@
     - name: Build Flask Docker image inside server
       shell: |
         export DOCKER_HOST=unix:///var/run/docker.sock
-        docker build -t flask-app /app
+        docker build --build-arg SERVER_PASSWORD="{{ vault_server_password }}" -t flask-app /app
       args:
         executable: /bin/bash
 
