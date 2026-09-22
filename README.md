@@ -19,6 +19,7 @@ I use this repository to practice cloud infrastructure, networking, Infrastructu
 | [lab-09-ansible](./lab-09-ansible) | Ansible playbook for local Nginx configuration, verified for idempotency |
 | [lab-10-monitoring](./lab-10-monitoring) | Prometheus and Grafana monitoring stack for the Kubernetes cluster, installed via Helm |
 | [lab-11-capstone](./lab-11-capstone) | End-to-end pipeline combining Terraform, Ansible, and Docker to provision, configure, and deploy a containerized Flask app, including a nested Docker-in-Docker setup |
+| [lab-12-terraform-modules](./lab-12-terraform-modules) | Reusable Terraform module (VNet, subnet, NSG) refactoring duplicated networking code from Labs 01-03 |
 
 ## Current focus
 
