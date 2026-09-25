@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "lab12-rg" {
 }
 
 module "networking" {
-  source = "./modules/networking"
+  source = "../../modules/networking"
 
   resource_group_name   = azurerm_resource_group.lab12-rg.name
   location               = azurerm_resource_group.lab12-rg.location
