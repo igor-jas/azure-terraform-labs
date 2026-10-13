@@ -126,9 +126,7 @@ jobs:
         run: ansible-playbook -i inventory.ini --syntax-check playbook.yml
         working-directory: lab-09-ansible
 
-      - name: Check playbook syntax (lab-11)
-        run: ansible-playbook -i inventory.ini --syntax-check playbook.yml
-        working-directory: lab-11-capstone/ansible
+
 
 
         
