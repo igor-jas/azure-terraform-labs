@@ -78,5 +78,55 @@ jobs:
           ./check-container-status.sh igor-flask-container 5000
         working-directory: lab-06-bash-scripting  
 
+  terraform-modules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt check (lab-12, all subfolders)
+        run: terraform fmt -check -recursive
+        working-directory: lab-12-terraform-modules
+
+      - name: Terraform validate (lab-12 dev)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-12-terraform-modules/environments/dev
+
+      - name: Terraform validate (lab-12 staging)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-12-terraform-modules/environments/staging
+
+      - name: Terraform fmt check (lab-11)
+        run: terraform fmt -check
+        working-directory: lab-11-capstone/terraform
+
+      - name: Terraform validate (lab-11)
+        run: |
+          terraform init -backend=false
+          terraform validate
+        working-directory: lab-11-capstone/terraform
+
+  ansible-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Ansible
+        run: pip install ansible
+
+      - name: Check playbook syntax (lab-09)
+        run: ansible-playbook -i inventory.ini --syntax-check playbook.yml
+        working-directory: lab-09-ansible
+
+
+
 
         
